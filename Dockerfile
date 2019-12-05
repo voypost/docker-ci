@@ -3,6 +3,7 @@ FROM google/cloud-sdk:272.0.0-alpine
 ARG DOCKER_VERSION=18.09.6
 ARG HELM_VERSION=v2.14.0
 ENV HELM_FILENAME=helm-${HELM_VERSION}-linux-amd64.tar.gz
+ENV DOCKERIZE_VERSION=v0.6.1
 
 RUN apk add openssl gettext jq
 
@@ -27,3 +28,7 @@ RUN apk add --no-cache --update \
     'yarn=1.16.0-r0'	
 
 RUN gcloud components install beta cloud_sql_proxy
+
+RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && tar -C /usr/local/bin -xzvf dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
+    && rm dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz
