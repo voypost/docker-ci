@@ -21,6 +21,9 @@ RUN curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/sta
 
 RUN curl -fLSs https://circle.ci/cli | bash
 
-RUN apk add --no-cache --update nodejs nodejs-npm yarn
+RUN apk add --no-cache --update \
+    'nodejs=10.16.3-r0' \
+    'npm=10.16.3-r0' \
+    'yarn=1.16.0-r0'	
 
 RUN gcloud components install beta cloud_sql_proxy
