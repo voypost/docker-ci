@@ -28,7 +28,7 @@ RUN apk add --no-cache --update \
     'yarn=1.16.0-r0'	
 
 RUN gcloud components install beta cloud_sql_proxy
-RUN apk add mysql-client
+RUN apk add mysql-client postgresql-client
 
 RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && tar -C /usr/local/bin -xzvf dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
