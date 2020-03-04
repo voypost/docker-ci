@@ -34,6 +34,21 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
     && tar -C /usr/local/bin -xzvf dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && rm dockerize-alpine-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
-    && unzip awscliv2.zip \
-    && ./aws/install
+## Commented due to
+# Error relocating /usr/local/bin/aws: __strcat_chk: symbol not found
+# Error relocating /usr/local/bin/aws: __snprintf_chk: symbol not found
+# Error relocating /usr/local/bin/aws: __vfprintf_chk: symbol not found
+# Error relocating /usr/local/bin/aws: __strdup: symbol not found
+# Error relocating /usr/local/bin/aws: __stpcpy_chk: symbol not found
+# Error relocating /usr/local/bin/aws: __vsnprintf_chk: symbol not found
+# Error relocating /usr/local/bin/aws: __strncpy_chk: symbol not found
+# Error relocating /usr/local/bin/aws: __strcpy_chk: symbol not found
+# Error relocating /usr/local/bin/aws: __fprintf_chk: symbol not found
+# Error relocating /usr/local/bin/aws: __strncat_chk: symbol not found
+# RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
+#     && unzip awscliv2.zip \
+#     && ./aws/install
+
+RUN curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+    && unzip awscli-bundle.zip
+    && ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
